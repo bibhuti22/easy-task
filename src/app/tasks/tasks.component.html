@@ -1,0 +1,27 @@
+@if (shouldShowCreateTask) {
+<app-modal
+  (closeModal)="shouldShowCreateTask = false"
+  (addTask)="onAddTask($event)"
+></app-modal>
+}
+
+<section id="tasks" selector>
+  <header>
+    <h2>{{ name }}'s Tasks</h2>
+    <menu>
+      <button (click)="onClickAddTask()">Add Task</button>
+    </menu>
+  </header>
+
+  @if (!selectedUserTasks.length) {
+  <h3>No Tasks</h3>
+  } @else {
+  <ul>
+    @for (task of selectedUserTasks; track task.id) {
+    <li>
+      <app-task [task]="task" (onComplete)="completeTask($event)"></app-task>
+    </li>
+    }
+  </ul>
+  }
+</section>
